@@ -109,10 +109,10 @@ public class CameraController : MonoBehaviour
             newRotation *= Quaternion.Euler(Vector3.up * rotationAmount);
         }
         if(Input.GetKey(KeyCode.R)){
-            newZoom += zoomAmount;
+            newZoom += zoomAmount/50f;
         }
         if(Input.GetKey(KeyCode.F)){
-            newZoom -= zoomAmount;
+            newZoom -= zoomAmount/50f;
         }
 
         transform.position = Vector3.Lerp(transform.position, newPos, Time.deltaTime * movementTime);
