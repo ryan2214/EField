@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {   
+    public static CameraController instance;
+    public Transform followTransform;
+    // coop with the obj followed with script inside its class
+    // public void OnMouseDown(){
+    //     CameraController.instance.followTransform = transform;   
+    // }
+    //
     public Transform cameraTransform;
 
     public float movementSpeed;
@@ -24,6 +31,7 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        instance = this;
         newPos = transform.position;
         newRotation = transform.rotation;
         newZoom = cameraTransform.localPosition;    
@@ -31,9 +39,17 @@ public class CameraController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        HandleMouseInput();
-        HandleMovementInput();
+    {   
+        if(followTransform != null){
+            transform.position = followTransform.position;
+        }else{
+            HandleMouseInput();
+            HandleMovementInput();
+        }
+        
+        if(Input.GetKeyDown(KeyCode.Escape)){
+            followTransform = null;
+        }
     }
 
     void HandleMouseInput(){
