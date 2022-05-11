@@ -43,7 +43,7 @@ public class CameraController : MonoBehaviour
         if(followTransform != null){
             transform.position = followTransform.position;
         }else{
-            HandleMouseInput();
+            //HandleMouseInput();
             HandleMovementInput();
         }
         
